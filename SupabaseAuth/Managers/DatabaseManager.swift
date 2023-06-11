@@ -14,7 +14,7 @@ class DatabaseManager {
     
     private init() {}
     
-    let client = SupabaseClient(supabaseURL: URL(string: "https://ixjfvcdmqnhfzdhpcjwv.supabase.co")!, supabaseKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml4amZ2Y2RtcW5oZnpkaHBjand2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODM3MjQ2MTksImV4cCI6MTk5OTMwMDYxOX0.JYC-8ibgH6ILDCFozR_dDzlGcPE6v2u1e3WQXza9Ni4")
+    let client = SupabaseClient(supabaseURL: URL(string: "YOUR_SERVER")!, supabaseKey: "YOUR_KEY")
     
     func createToDoItem(item: ToDoPayload) async throws {
         let response = try await client.database.from("todos").insert(values: item).execute()
