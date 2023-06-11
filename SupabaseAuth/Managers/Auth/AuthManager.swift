@@ -19,10 +19,7 @@ class AuthManager {
     
     private init() {}
     
-    let client = SupabaseClient(supabaseURL: URL(string: "https://ixjfvcdmqnhfzdhpcjwv.supabase.co")!, supabaseKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml4amZ2Y2RtcW5oZnpkaHBjand2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODM3MjQ2MTksImV4cCI6MTk5OTMwMDYxOX0.JYC-8ibgH6ILDCFozR_dDzlGcPE6v2u1e3WQXza9Ni4", options: SupabaseClientOptions(db: .init(schema: "/rest/v1"), auth: .init(), global: .init(headers: [
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml4amZ2Y2RtcW5oZnpkaHBjand2Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY4MzcyNDYxOSwiZXhwIjoxOTk5MzAwNjE5fQ.e8EhHSa7KK-2eiiwEHSdu_xKlfudgZ6kkK8aud2PvjI",
-        "apikey" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml4amZ2Y2RtcW5oZnpkaHBjand2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODM3MjQ2MTksImV4cCI6MTk5OTMwMDYxOX0.JYC-8ibgH6ILDCFozR_dDzlGcPE6v2u1e3WQXza9Ni4",
-    ], httpClient: .init())))
+    let client = SupabaseClient(supabaseURL: URL(string: "https://YOUR_SERVER.supabase.co")!, supabaseKey: "YOUR_KEY")
     
     
     
@@ -64,6 +61,11 @@ class AuthManager {
         return AppUser(uid: session.user.id.uuidString, email: session.user.email)
     }
     
+    func signOut() async throws {
+        try await client.auth.signOut()
+    }
+    
+    // THIS CODE CAN BE IGNORED, THIS IS TEST CODE FOR TRYING TO GET SIGN WITH GOOGLE TO WORK
     func network(idToken: String, nonce: String) async throws {
         let url = URL(string: "https://ixjfvcdmqnhfzdhpcjwv.supabase.co/auth/v1/token?grant_type=id_token")!
         
@@ -71,7 +73,7 @@ class AuthManager {
         urlRequest.httpMethod = "POST"
         
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        urlRequest.addValue("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml4amZ2Y2RtcW5oZnpkaHBjand2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODM3MjQ2MTksImV4cCI6MTk5OTMwMDYxOX0.JYC-8ibgH6ILDCFozR_dDzlGcPE6v2u1e3WQXza9Ni4", forHTTPHeaderField: "apikey")
+        urlRequest.addValue("YOUR_KEY", forHTTPHeaderField: "apikey")
         
         let json = [
             "id_token": idToken,
@@ -86,9 +88,6 @@ class AuthManager {
         let (data, response) = try await URLSession.shared.data(for: urlRequest)
         print(String(data: data, encoding: .utf8))
     }
-    
-    func signOut() async throws {
-        try await client.auth.signOut()
-    }
+   
     
 }
