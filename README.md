@@ -5,7 +5,7 @@
 
 # Video tutorial
 
-    [https://www.youtube.com/watch?v=31RyTCeALQQ](https://www.youtube.com/playlist?list=PLWqniOnIerMYcqbMXAhdxAPDkGGNvpo7F)
+    https://www.youtube.com/playlist?list=PLWqniOnIerMYcqbMXAhdxAPDkGGNvpo7F
 
 # Description
 
